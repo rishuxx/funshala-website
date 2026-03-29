@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funshala - A Magical Preschool Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              'baloo': ['Baloo Bhai 2', 'sans-serif'],
+              'nunito': ['Nunito', 'sans-serif'],
+            },
+            colors: {
+              'brand-red': '#FF6B6B',
+              'brand-orange': '#FFA500',
+              'brand-yellow': '#FFD700',
+              'brand-green': '#4CAF50',
+              'brand-blue': '#4A90E2',
+              'brand-indigo': '#4B0082',
+              'brand-violet': '#EE82EE',
+              'pastel-bg': '#FFF9F0',
+              'dark-text': '#4F4F4F',
+              'rainbow-red': '#FF8A8A',
+              'rainbow-orange': '#FFC47E',
+              'rainbow-yellow': '#FFF78A',
+              'rainbow-green': '#A2E8A2',
+              'rainbow-blue': '#90CAF9',
+              'rainbow-indigo': '#B39DDB',
+            },
+            keyframes: {
+              'fade-in-up': {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'rainbow-swoop': {
+                 '0%': { transform: 'translateY(100%) scale(0.5)', opacity: '0' },
+                 '100%': { transform: 'translateY(0) scale(1)', opacity: '1' },
+              },
+               'scroll-left': {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              'rainbow-wipe-in': {
+                '0%': { transform: 'translateY(-100%)' },
+                '100%': { transform: 'translateY(0)' },
+              },
+              'rainbow-wipe-out': {
+                '0%': { transform: 'translateY(0)' },
+                '100%': { transform: 'translateY(100%)' },
+              },
+              'logo-in': {
+                '0%': { transform: 'scale(0.8) translateY(20px)', opacity: '0' },
+                '50%': { transform: 'scale(1.05) translateY(0)', opacity: '1' },
+                '100%': { transform: 'scale(1) translateY(0)', opacity: '1' },
+              },
+              'logo-out': {
+                '0%': { transform: 'scale(1)', opacity: '1' },
+                '100%': { transform: 'scale(0.8)', opacity: '0' },
+              },
+              'float': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              'twinkle': {
+                '0%, 100%': { opacity: 0.5 },
+                '50%': { opacity: 1 },
+              },
+            },
+            animation: {
+              'fade-in-up': 'fade-in-up 1s ease-out forwards',
+              'rainbow-swoop': 'rainbow-swoop 1s cubic-bezier(0.25, 1, 0.5, 1) forwards',
+              'scroll-left': 'scroll-left 40s linear infinite',
+              'rainbow-wipe-in': 'rainbow-wipe-in 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards',
+              'rainbow-wipe-out': 'rainbow-wipe-out 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards',
+              'logo-in': 'logo-in 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards',
+              'logo-out': 'logo-out 0.6s cubic-bezier(0.86, 0, 0.07, 1) forwards',
+              'float': 'float 4s ease-in-out infinite',
+              'twinkle': 'twinkle 2s ease-in-out infinite',
+            },
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.1.1",
+    "path": "https://esm.sh/path@^0.12.7",
+    "tailwindcss": "https://esm.sh/tailwindcss@^4.1.18",
+    "buffer": "https://esm.sh/buffer@^6.0.3",
+    "fs/": "https://esm.sh/fs@^0.0.1-security/",
+    "bcryptjs": "https://esm.sh/bcryptjs@^3.0.3",
+    "next/": "https://esm.sh/next@^16.1.1/",
+    "next": "https://esm.sh/next@^16.1.1",
+    "mongoose": "https://esm.sh/mongoose@^9.1.0",
+    "jose": "https://esm.sh/jose@^6.1.3",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?external=react,react-dom",
+    "@remix-run/router": "https://esm.sh/@remix-run/router@1.15.3",
+    "react-router": "https://esm.sh/react-router@6.22.3?external=react"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

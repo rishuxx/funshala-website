@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 718.55 190.51">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #a64886;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-6, .cls-7 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-6, .cls-3 {
+        fill: #1892d3;
+      }
+
+      .cls-2 {
+        fill: #eb0e8a;
+      }
+
+      .cls-7, .cls-5 {
+        fill: #f9cd12;
+      }
+
+      .cls-4 {
+        fill: #a3c940;
+      }
+
+      .cls-8 {
+        font-family: SnapITC-Regular, 'Snap ITC';
+        font-size: 155.32px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3" data-name="Layer 3">
+    <text class="cls-8" transform="translate(.87 133.47) rotate(1.19)"><tspan class="cls-3" x="0" y="0">f</tspan><tspan class="cls-2" x="90.39" y="0">u</tspan><tspan class="cls-7" x="189.04" y="0">n</tspan><tspan class="cls-1" x="282.69" y="0">s</tspan><tspan class="cls-4" x="373.68" y="0">h</tspan><tspan class="cls-5" x="466.87" y="0">a</tspan><tspan class="cls-6" x="560.98" y="0">l</tspan><tspan class="cls-4" x="617.08" y="0">a</tspan></text>
+  </g>
+</svg>
