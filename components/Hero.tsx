@@ -49,7 +49,7 @@ const Hero: React.FC = () => {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-amber-500/90 text-amber-950 rounded-full font-semibold text-sm shadow-sm">
                 <Sparkles size={16} />
-                Admissions Open • 2025–26
+                Admissions Open • 2026–27
               </div>
 
               {/* Heading */}
