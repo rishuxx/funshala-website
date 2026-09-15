@@ -13,11 +13,11 @@ type IconProps = {
 
 // FIX: Pass style prop to the root div element.
 export const Logo: React.FC<IconProps> = ({ className, style }) => (
-  <div className={`inline-flex items-center ${className}`} style={style}>
+  <div className={`inline-flex items-center ${className || ''}`} style={style}>
     <img
       src={funshalaLogo}
-      alt="Funshala Preschool Logo"
-      className="h-24 w-auto object-contain"
+      alt="Funshala Kindergarten"
+      className="h-full w-auto max-h-16 object-contain"
       draggable={false}
     />
   </div>

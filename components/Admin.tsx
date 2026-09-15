@@ -19,16 +19,12 @@ const LoginForm: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
     try {
       const result = await api.login({ email, password });
       if (result.success) {
-        localStorage.setItem(
-          "funshala_admin_info",
-          JSON.stringify(result.data)
-        );
         onLogin();
       } else {
-        setError(result.message || "Login failed. Please try again.");
+        setError(result.message || "Invalid credentials or email not confirmed.");
       }
-    } catch (err) {
-      setError("An error occurred. Please try again.");
+    } catch (err: any) {
+      setError("An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -767,15 +763,276 @@ const CrudManager: React.FC<{ api: any; title: string; fields: any[] }> = ({
   );
 };
 
+// --- HERO & SITE SETTINGS MANAGER ---
+const HeroSettingsManager: React.FC = () => {
+  const [settings, setSettings] = useState<any>({
+    badge: "Admissions Open • 2026–27",
+    headlineStart: "A Joyful Start to",
+    headlineHighlight: "Lifelong Learning",
+    subtext: "Funshala is a Montessori-inspired preschool where children learn, explore, and grow in a safe, nurturing, and thoughtfully designed environment.",
+    primaryCtaText: "Explore Programs",
+    primaryCtaLink: "/programs",
+    secondaryCtaText: "Book a School Tour",
+    secondaryCtaLink: "/contact",
+    heroImage: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const load = async () => {
+      const data = await api.getSiteSettings("hero");
+      if (data) setSettings((prev: any) => ({ ...prev, ...data }));
+    };
+    load();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setSettings((prev: any) => ({ ...prev, [name]: value }));
+  };
+
+  const handleHeroImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files[0]) return;
+    const file = e.target.files[0];
+    setUploadingImage(true);
+    setMessage("");
+    try {
+      const res = await api.uploadHeroImage(file);
+      if (res.success && res.url) {
+        setSettings((prev: any) => ({ ...prev, heroImage: res.url }));
+        setMessage("Hero image uploaded! Click 'Save Hero Settings' below to publish.");
+      } else {
+        alert("Image upload failed: " + (res.message || "Please verify the 'gallery' storage bucket exists in Supabase."));
+      }
+    } catch (err: any) {
+      alert("Error uploading image: " + err.message);
+    } finally {
+      setUploadingImage(false);
+    }
+  };
+
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+    try {
+      const res = await api.updateSiteSettings("hero", settings);
+      if (res.success) {
+        setMessage("Hero settings saved to Supabase successfully!");
+        setTimeout(() => setMessage(""), 4000);
+      } else {
+        alert("Failed to save settings: " + res.message);
+      }
+    } catch (err: any) {
+      alert("Error: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-3xl bg-white p-8 rounded-2xl shadow-md border border-gray-100">
+      <h3 className="text-2xl font-baloo font-bold mb-6 text-brand-blue">
+        Hero Section Live Content Editor
+      </h3>
+      <form onSubmit={handleSave} className="space-y-6">
+        <Input
+          label="Admissions Badge Text"
+          name="badge"
+          value={settings.badge || ""}
+          onChange={handleChange}
+          placeholder="e.g. Admissions Open • 2026–27"
+          required
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            label="Headline Prefix"
+            name="headlineStart"
+            value={settings.headlineStart || ""}
+            onChange={handleChange}
+            placeholder="e.g. A Joyful Start to"
+            required
+          />
+          <Input
+            label="Headline Highlight (Gradient Text)"
+            name="headlineHighlight"
+            value={settings.headlineHighlight || ""}
+            onChange={handleChange}
+            placeholder="e.g. Lifelong Learning"
+            required
+          />
+        </div>
+
+        <Textarea
+          label="Hero Subtitle / Description"
+          name="subtext"
+          value={settings.subtext || ""}
+          onChange={handleChange}
+          rows={3}
+          required
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            label="Primary CTA Text"
+            name="primaryCtaText"
+            value={settings.primaryCtaText || ""}
+            onChange={handleChange}
+          />
+          <Input
+            label="Primary CTA Link"
+            name="primaryCtaLink"
+            value={settings.primaryCtaLink || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Input
+            label="Secondary CTA Text"
+            name="secondaryCtaText"
+            value={settings.secondaryCtaText || ""}
+            onChange={handleChange}
+          />
+          <Input
+            label="Secondary CTA Link"
+            name="secondaryCtaLink"
+            value={settings.secondaryCtaLink || ""}
+            onChange={handleChange}
+          />
+        </div>
+
+        {/* Hero Background Image Upload */}
+        <div className="border-t pt-4">
+          <label className="block text-sm font-bold text-gray-700 mb-2">
+            Hero Background Image
+          </label>
+          {settings.heroImage && (
+            <div className="mb-4">
+              <img
+                src={settings.heroImage}
+                alt="Current Hero"
+                className="w-full h-40 object-cover rounded-xl border"
+              />
+              <p className="text-xs text-gray-500 mt-1">Live custom hero image set</p>
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/*, image/webp, image/png, image/jpeg, image/jpg"
+            onChange={handleHeroImageUpload}
+            disabled={uploadingImage}
+            className="text-sm"
+          />
+          {uploadingImage && <p className="text-xs text-blue-600 mt-1">Uploading image to Supabase Storage...</p>}
+        </div>
+
+        {message && (
+          <p className="text-sm font-bold text-green-600 bg-green-50 p-3 rounded-lg">
+            {message}
+          </p>
+        )}
+
+        <Button type="submit" disabled={loading || uploadingImage}>
+          {loading ? "Saving..." : "Save Hero Settings"}
+        </Button>
+      </form>
+    </div>
+  );
+};
+
+// --- SECURITY & PASSWORD MANAGER ---
+const SecuritySettingsManager: React.FC = () => {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setMessage("");
+
+    if (newPassword.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await api.updateAdminPassword(newPassword);
+      if (res.success) {
+        setMessage("Your admin password has been updated securely in Supabase!");
+        setNewPassword("");
+        setConfirmPassword("");
+      } else {
+        setError(res.message || "Failed to update password");
+      }
+    } catch (err: any) {
+      setError("Error updating password: " + err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="max-w-xl bg-white p-8 rounded-2xl shadow-md border border-gray-100">
+      <h3 className="text-2xl font-baloo font-bold mb-4 text-brand-blue">
+        Security & Password Protection
+      </h3>
+      <p className="text-sm text-gray-600 mb-6">
+        Update your administrative password. Sessions are cryptographically signed and stored in memory by Supabase Auth.
+      </p>
+      <form onSubmit={handlePasswordChange} className="space-y-4">
+        <Input
+          label="New Password"
+          name="newPassword"
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          placeholder="At least 6 characters"
+          required
+        />
+        <Input
+          label="Confirm New Password"
+          name="confirmPassword"
+          type="password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="Repeat new password"
+          required
+        />
+
+        {error && <p className="text-sm text-red-600 bg-red-50 p-3 rounded-lg">{error}</p>}
+        {message && <p className="text-sm font-bold text-green-600 bg-green-50 p-3 rounded-lg">{message}</p>}
+
+        <Button type="submit" disabled={loading}>
+          {loading ? "Updating Password..." : "Change Admin Password"}
+        </Button>
+      </form>
+    </div>
+  );
+};
+
 // --- DASHBOARD ---
 type AdminView =
   | "admissions"
   | "franchise"
   | "contact"
   | "gallery"
+  | "heroSettings"
   | "students"
   | "programs"
-  | "events";
+  | "events"
+  | "security";
 
 const AdminDashboard: React.FC = () => {
   const [view, setView] = useState<AdminView>("admissions");
@@ -795,6 +1052,8 @@ const AdminDashboard: React.FC = () => {
         return <EnquiryManager type="contact" title="Contact Messages" />;
       case "gallery":
         return <GalleryManager />;
+      case "heroSettings":
+        return <HeroSettingsManager />;
       case "students":
         return (
           <CrudManager
@@ -837,6 +1096,8 @@ const AdminDashboard: React.FC = () => {
             ]}
           />
         );
+      case "security":
+        return <SecuritySettingsManager />;
       default:
         return null;
     }
@@ -866,9 +1127,11 @@ const AdminDashboard: React.FC = () => {
             "franchise",
             "contact",
             "gallery",
+            "heroSettings",
             "students",
             "programs",
             "events",
+            "security",
           ] as AdminView[]
         ).map((v) => (
           <button
@@ -890,20 +1153,34 @@ const AdminDashboard: React.FC = () => {
   );
 };
 
-// --- MAIN ADMIN COMPONENT ---
+// --- MAIN ADMIN COMPONENT (CRYPTOGRAPHICALLY VERIFIED SESSION) ---
 const Admin: React.FC = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
   useEffect(() => {
-    try {
-      const adminInfo = localStorage.getItem("funshala_admin_info");
-      if (adminInfo && JSON.parse(adminInfo).token) {
-        setIsLoggedIn(true);
-      }
-    } catch (e) {
-      setIsLoggedIn(false);
-    }
+    // 1. Check existing verified Supabase session
+    api.getSession().then((session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    // 2. Real-time auth listener
+    const { data: authListener } = api.onAuthStateChange((session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
   }, []);
+
+  // Show subtle loading while verifying cryptographic session
+  if (isLoggedIn === null) {
+    return (
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-blue"></div>
+      </div>
+    );
+  }
 
   if (!isLoggedIn) {
     return <LoginForm onLogin={() => setIsLoggedIn(true)} />;

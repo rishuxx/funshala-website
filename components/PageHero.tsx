@@ -12,10 +12,9 @@ const PageHeroBackground: React.FC = () => (
 
 const PageHero: React.FC<{ title: string }> = ({ title }) => {
   return (
-    <section className="relative h-[50vh] min-h-[300px] flex items-center justify-center text-center overflow-hidden">
-      <PageHeroBackground />
+    <section className="relative h-[40vh] min-h-[260px] flex items-center justify-center text-center overflow-hidden bg-[#0F2A44]">
       <div className="relative z-10 p-4">
-        <h1 className="text-5xl md:text-7xl font-baloo font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-red via-brand-blue to-brand-green animate-fade-in-up">
+        <h1 className="text-4xl md:text-6xl font-outfit font-extrabold text-white tracking-tight">
           {title}
         </h1>
       </div>

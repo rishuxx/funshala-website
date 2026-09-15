@@ -1,6 +1,7 @@
 import React from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import FranchiseForm from "./FranchiseForm";
+import { Coins, Building2, Handshake } from "lucide-react";
 
 /* ------------------ BENEFIT CARD ------------------ */
 
@@ -8,29 +9,30 @@ const BenefitCard: React.FC<{
   title: string;
   value: string;
   description: string;
+  icon: React.ReactNode;
   index: number;
-}> = ({ title, value, description, index }) => {
+}> = ({ title, value, description, icon, index }) => {
   const { ref, isVisible } = useScrollAnimation();
-  const delay = `${index * 150}ms`;
+  const delay = `${index * 120}ms`;
 
   return (
     <div
       ref={ref}
       style={{ transitionDelay: delay }}
-      className={`relative transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      className={`p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:border-amber-300/50 transition-all duration-500 hover:bg-white/15 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
     >
-      {/* Brand Dashed Border */}
-      <div className="absolute -inset-[3px] border border-dashed border-orange-400/60 rounded-2xl" />
-
-      <div className="relative bg-white rounded-2xl p-6 text-center shadow-lg">
-        <h3 className="text-sm font-bold text-orange-600 mb-1">{title}</h3>
-        <p className="text-4xl font-baloo font-bold text-gray-900 my-2">
-          {value}
-        </p>
-        <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+      <div className="flex items-center gap-3 mb-2">
+        <span className="text-2xl">{icon}</span>
+        <h3 className="text-xs font-bold uppercase tracking-wider text-amber-300 font-outfit">
+          {title}
+        </h3>
       </div>
+      <p className="text-3xl font-outfit font-bold text-white mb-2 tracking-tight">
+        {value}
+      </p>
+      <p className="text-white/80 text-sm leading-relaxed font-sans">{description}</p>
     </div>
   );
 };
@@ -43,79 +45,77 @@ const Franchise: React.FC = () => {
   return (
     <section
       id="franchise"
-      className="py-28 md:py-36 relative"
-      style={{ backgroundColor: "#4B2E5A" }}
+      className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-br from-[#1b2b40] via-[#243b55] to-[#141E30]"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        {/* ===== ATTENTION HERO BLOCK ===== */}
+      {/* Subtle decorative glow circles */}
+      <div className="absolute top-0 right-10 w-96 h-96 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-10 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl pointer-events-none" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+        {/* ===== HERO BANNER ===== */}
         <div
           ref={ref}
-          className={`relative mb-24 transition-all duration-1000 ${
+          className={`max-w-4xl mx-auto mb-14 text-center transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}
         >
-          {/* Dashed Border */}
-          <div className="absolute -inset-[4px] border border-dashed border-orange-400/70 rounded-[2.5rem]" />
+          <span className="inline-flex items-center gap-1.5 px-4 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-300/30 font-fredoka text-xs font-bold mb-4 tracking-wide">
+            Partnership & Growth Opportunity
+          </span>
 
-          <div className="relative bg-white rounded-[2.5rem] px-10 py-14 text-center shadow-2xl">
-            <span className="inline-block mb-4 px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-bold text-sm">
-              Franchise Opportunity
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-outfit font-bold text-white mb-4 tracking-tight leading-tight">
+            Turn Your Passion Into a <br />
+            <span className="text-amber-400">
+              Profitable Preschool Business
             </span>
+          </h2>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-baloo font-bold text-gray-900 mb-6">
-              Turn Your Passion Into a
-              <br />
-              <span className="text-orange-500">
-                Profitable Preschool Business
-              </span>
-            </h2>
-
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Join Funshala and build a trusted preschool brand in your city —
-              with complete training, curriculum, and operational support.
-            </p>
-          </div>
+          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed font-sans">
+            Join the Funshala network and launch a trusted early-education center with 360° teacher training, Montessori-aligned curriculum, and operational assistance.
+          </p>
         </div>
 
-        {/* ===== MAIN CONTENT ===== */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* LEFT — BENEFITS */}
-          <div className="space-y-8">
+        {/* ===== MAIN CONTENT GRID ===== */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start max-w-7xl mx-auto">
+          {/* LEFT — 3 BENEFIT CARDS & TRUST HIGHLIGHTS */}
+          <div className="lg:col-span-5 space-y-4">
             <BenefitCard
+              icon={<Coins className="w-6 h-6 text-amber-300" />}
               title="Investment Range"
-              value="₹10–15 L"
-              description="Low-risk entry with strong ROI and scalable growth."
+              value="₹10–15 Lakhs"
+              description="Low initial capital with proven early break-even and sustainable admissions pipeline."
               index={0}
             />
             <BenefitCard
+              icon={<Building2 className="w-6 h-6 text-amber-300" />}
               title="Space Requirement"
-              value="1500+ sq ft"
-              description="Child-safe infrastructure with a dedicated play zone."
+              value="1500+ Sq. Ft."
+              description="Child-safe indoor setup with dedicated active play zone and natural lighting."
               index={1}
             />
             <BenefitCard
-              title="Complete Support"
-              value="360°"
-              description="Training, branding, curriculum & marketing assistance."
+              icon={<Handshake className="w-6 h-6 text-amber-300" />}
+              title="360° Brand Support"
+              value="Complete Handholding"
+              description="Teacher recruitment, child curriculum kits, local marketing support, and admissions CRM."
               index={2}
             />
+
+            <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-white/90">
+              <h4 className="font-fredoka font-bold text-base text-amber-300 mb-2">
+                Why partner with Funshala?
+              </h4>
+              <ul className="text-xs space-y-2 text-white/80 list-disc list-inside">
+                <li>Established Montessori & Playway blended pedagogy</li>
+                <li>Comprehensive teacher training manuals & curriculum boxes</li>
+                <li>Digital marketing support for new center launch inquiries</li>
+              </ul>
+            </div>
           </div>
 
           {/* RIGHT — FORM */}
-          <div className="relative">
-            {/* Dashed Border */}
-            <div className="absolute -inset-[4px] border border-dashed border-orange-400/60 rounded-3xl" />
-
-            <div className="relative bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
-              <h3 className="text-2xl md:text-3xl font-baloo font-bold text-gray-900 mb-4">
-                Start Your Franchise Journey
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Share your details and our franchise team will connect with you.
-              </p>
-
-              <FranchiseForm />
-            </div>
+          <div className="lg:col-span-7">
+            <FranchiseForm />
           </div>
         </div>
       </div>

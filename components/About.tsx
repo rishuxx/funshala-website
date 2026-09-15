@@ -10,12 +10,14 @@ import {
 } from "lucide-react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 
+import aboutImg from "../assets/about1.jpg";
+
 /* ------------------ REUSABLE COMPONENTS ------------------ */
 
 const SectionTitle: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => (
-  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 text-center tracking-tight">
+  <h2 className="text-3xl md:text-4xl lg:text-5xl font-outfit font-bold text-gray-900 mb-3 text-center tracking-tight">
     {children}
   </h2>
 );
@@ -23,7 +25,7 @@ const SectionTitle: React.FC<{ children: React.ReactNode }> = ({
 const SectionSubtitle: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => (
-  <p className="text-base md:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12 leading-relaxed">
+  <p className="text-base md:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-10 leading-relaxed font-sans">
     {children}
   </p>
 );
@@ -37,8 +39,8 @@ const AnimatedBlock: React.FC<{
     <div
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      className={`transition-all duration-500 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       }`}
     >
       {children}
@@ -50,62 +52,51 @@ const AnimatedBlock: React.FC<{
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-20 md:py-28 relative">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
+    <section id="about" className="py-16 md:py-24 relative bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         {/* Header */}
         <AnimatedBlock>
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full font-semibold text-sm mb-5 shadow-sm">
-              <Sparkles size={16} />
-              About Funshala
-            </div>
-            <SectionTitle>Nurturing Tomorrow&apos;s Leaders</SectionTitle>
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1 bg-amber-100 text-amber-900 rounded-full font-outfit font-semibold text-sm mb-3">
+              Why Funshala?
+            </span>
+            <SectionTitle>Nurturing Tomorrow&apos;s Thinkers & Leaders</SectionTitle>
             <SectionSubtitle>
-              A Montessori-inspired preschool where quality education meets
-              compassionate care, fostering holistic development in every child
+              A Montessori-inspired sanctuary where quality early education meets
+              warm, individualized care to foster joyful development in every child.
             </SectionSubtitle>
           </div>
         </AnimatedBlock>
 
         {/* Main Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-20">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center mb-12">
           {/* Image */}
           <AnimatedBlock delay={100}>
-            <div className="relative group">
-              {/* Brand Dashed Border */}
-              <div className="absolute -inset-[3px] border border-dashed border-orange-400/60 rounded-2xl transition-all duration-300 group-hover:border-orange-500/80" />
-
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative">
+              <div className="relative bg-white rounded-3xl overflow-hidden shadow-xl border border-gray-100">
                 <img
-                  src="../assets/about1.jpg"
+                  src={aboutImg}
                   alt="Children learning at Funshala"
-                  className="w-full h-auto"
+                  className="w-full h-auto object-cover max-h-[440px]"
                   loading="lazy"
+                  decoding="async"
                 />
 
-                {/* Stats */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="bg-white/95 backdrop-blur-md rounded-xl p-4 shadow-lg">
-                    <div className="grid grid-cols-3 gap-4 text-center">
+                {/* Stats Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                  <div className="bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-lg border border-orange-100">
+                    <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
-                        <p className="text-2xl font-bold text-blue-600">100+</p>
-                        <p className="text-xs text-gray-600 font-medium">
-                          Happy Students
-                        </p>
+                        <p className="text-2xl font-outfit font-bold text-brand-blue">100+</p>
+                        <p className="text-xs text-gray-600 font-sans font-medium">Happy Children</p>
+                      </div>
+                      <div className="border-x border-gray-200">
+                        <p className="text-2xl font-outfit font-bold text-brand-green">5+</p>
+                        <p className="text-xs text-gray-600 font-sans font-medium">Years Experience</p>
                       </div>
                       <div>
-                        <p className="text-2xl font-bold text-green-600">5+</p>
-                        <p className="text-xs text-gray-600 font-medium">
-                          Years Experience
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-2xl font-bold text-purple-600">
-                          98%
-                        </p>
-                        <p className="text-xs text-gray-600 font-medium">
-                          Parent Satisfaction
-                        </p>
+                        <p className="text-2xl font-outfit font-bold text-brand-red">98%</p>
+                        <p className="text-xs text-gray-600 font-sans font-medium">Parent Trust</p>
                       </div>
                     </div>
                   </div>
@@ -113,8 +104,8 @@ const About: React.FC = () => {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -top-4 -right-4 bg-orange-500 text-white rounded-full p-4 shadow-lg">
-                <Award size={32} strokeWidth={2.5} />
+              <div className="absolute -top-3 -right-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl p-3 shadow-lg">
+                <Award size={28} strokeWidth={2.5} />
               </div>
             </div>
           </AnimatedBlock>

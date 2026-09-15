@@ -60,129 +60,109 @@ const Header: React.FC<{ currentPage?: string }> = () => {
   };
 
   return (
-    <header className="fixed top-2 left-0 right-0 z-50 py-6 lg:py-8">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="lg:translate-x-[-100px] flex-shrink-0 min-w-[140px] md:min-w-[180px]">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md bg-white/95 border-b border-orange-100 shadow-sm">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 py-2.5 sm:py-3">
+        <div className="flex items-center justify-between gap-4">
+          {/* Logo with proper spacious container */}
+          <div className="flex-shrink-0 py-1">
             <Link
               to="/"
               onClick={(e) => handleNavClick(e, "/")}
-              className="block transition-transform duration-300 hover:scale-105"
+              className="flex items-center transition-transform duration-200 hover:opacity-95"
             >
-              <Logo className="h-12 md:h-14 text-3xl" />
+              <Logo className="h-14 sm:h-16 w-auto" />
             </Link>
           </div>
 
-          {/* Desktop Nav with Slick Thin Dotted Border */}
-          <div className="hidden md:block relative group">
-            {/* Slick Thin Dashed Border - Single Layer */}
-            <div className="absolute -inset-[2px] border border-dashed border-orange-400/60 rounded-full group-hover:border-orange-500/80 transition-all duration-300" />
+          {/* Desktop Nav - Clean Modern Pills */}
+          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2 bg-amber-50/70 p-1.5 rounded-full border border-orange-200/60 shadow-inner">
+            {NAV_LINKS.map((link: NavLink, index: number) => {
+              const isActive =
+                link.page === "/"
+                  ? location.pathname === "/"
+                  : location.pathname.startsWith(link.page);
 
-            {/* Navigation Box */}
-            <nav
-              className="relative flex items-center space-x-6 lg:space-x-8 rounded-full px-8 py-3
-              bg-white/30 backdrop-blur-xl border border-white/60
-              shadow-[0_8px_32px_rgba(31,38,135,0.1)] ring-1 ring-white/30"
-            >
-              {NAV_LINKS.map((link: NavLink, index: number) => {
-                const isActive =
-                  link.page === "/"
-                    ? location.pathname === "/"
-                    : location.pathname.startsWith(link.page);
+              return (
+                <Link
+                  key={link.name}
+                  to={link.page}
+                  onClick={(e) => handleNavClick(e, link.page)}
+                  className={`font-fredoka font-medium text-[0.95rem] px-4 py-1.5 rounded-full transition-all duration-200 ${
+                    isActive
+                      ? "bg-white text-brand-red shadow-sm font-semibold scale-105"
+                      : "text-gray-700 hover:text-brand-orange hover:bg-white/60"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
 
-                return (
-                  <Link
-                    key={link.name}
-                    to={link.page}
-                    onClick={(e) => handleNavClick(e, link.page)}
-                    className={`font-baloo font-bold text-[1.1rem] px-2 py-1 relative group/link transition-colors duration-300 ${getLinkColorClass(
-                      index,
-                      isActive
-                    )}`}
-                  >
-                    {link.name}
-                    <span
-                      className={`absolute bottom-0 left-0 w-full h-1 bg-current rounded-full transition-transform duration-300 origin-left ${
-                        isActive
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover/link:scale-x-100"
-                      }`}
-                    />
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden md:block min-w-[140px] text-right">
+          {/* Desktop CTA without emojis */}
+          <div className="hidden md:flex items-center gap-3">
             <Link
               to="/admissions"
               onClick={(e) => handleNavClick(e, "/admissions")}
-              className="inline-block px-8 py-3 text-lg bg-gradient-to-r from-[#FF0055] via-[#FF5500] to-[#FF9900]
-              text-white font-extrabold font-baloo rounded-full shadow-lg
-              hover:scale-110 active:scale-95 transition-all duration-300 border-2 border-white/20"
+              className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-fredoka font-semibold rounded-full shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 text-sm"
             >
-              Enroll Now 🚀
+              <span>Enroll Now</span>
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 bg-white/30 backdrop-blur-md border border-white/40 rounded-xl text-[#2A0A55]"
+              className="p-2.5 bg-orange-50 hover:bg-orange-100 rounded-xl text-gray-800 transition-colors"
+              aria-label="Toggle navigation menu"
             >
               {isMobileMenuOpen ? (
-                <XIcon className="w-8 h-8" />
+                <XIcon className="w-6 h-6 text-brand-red" />
               ) : (
-                <MenuIcon className="w-8 h-8" />
+                <MenuIcon className="w-6 h-6 text-brand-blue" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-t shadow-xl
-        transition-all duration-300 overflow-hidden ${
-          isMobileMenuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="container mx-auto px-4 py-6 flex flex-col space-y-4">
-          {NAV_LINKS.map((link, index) => {
-            const isActive =
-              link.page === "/"
-                ? location.pathname === "/"
-                : location.pathname.startsWith(link.page);
+      {/* Mobile Slide-Over Menu */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-orange-100 shadow-2xl px-6 py-6 transition-all duration-300 animate-fade-in-up">
+          <div className="flex flex-col space-y-2 mb-6">
+            {NAV_LINKS.map((link) => {
+              const isActive =
+                link.page === "/"
+                  ? location.pathname === "/"
+                  : location.pathname.startsWith(link.page);
 
-            return (
-              <Link
-                key={link.name}
-                to={link.page}
-                onClick={(e) => handleNavClick(e, link.page)}
-                className={`text-xl font-baloo font-bold text-center py-3 border-b last:border-0 ${getLinkColorClass(
-                  index,
-                  isActive
-                )}`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
+              return (
+                <Link
+                  key={link.name}
+                  to={link.page}
+                  onClick={(e) => handleNavClick(e, link.page)}
+                  className={`text-lg font-fredoka font-medium px-4 py-2.5 rounded-xl transition-colors ${
+                    isActive
+                      ? "bg-orange-100 text-brand-red font-semibold"
+                      : "text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
 
           <Link
             to="/admissions"
             onClick={(e) => handleNavClick(e, "/admissions")}
-            className="w-full text-center px-6 py-4 mt-4 text-xl bg-gradient-to-r from-[#FF0055] via-[#FF5500] to-[#FF9900]
-            text-white font-bold font-baloo rounded-full shadow-lg"
+            className="w-full text-center py-3.5 bg-gradient-to-r from-brand-red to-brand-orange text-white font-fredoka font-semibold text-lg rounded-xl shadow-md block"
           >
-            Enroll Now 🚀
+            Admissions Open • Apply Now 🚀
           </Link>
         </div>
-      </div>
+      )}
     </header>
   );
 };

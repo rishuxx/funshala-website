@@ -22,7 +22,7 @@ import BrandBorders from "./components/BrandBorders";
 // The "Layout" component renders the persistent parts of the app
 const Layout: React.FC = () => {
   return (
-    <div className="font-nunito text-dark-text overflow-x-hidden relative min-h-screen flex flex-col">
+    <div className="font-outfit font-sans text-dark-text overflow-x-hidden relative min-h-screen flex flex-col">
       <BrandBorders />
       <DoodleBackground />
       <PageTransition />
