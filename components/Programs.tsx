@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import type { Program } from "../types";
 import useScrollAnimation from "../hooks/useScrollAnimation";
@@ -143,8 +144,8 @@ const ProgramCard: React.FC<{
           <ul className="space-y-2 mb-6">
             {program.features.map((feature) => (
               <li key={feature} className="flex items-center text-xs sm:text-sm font-medium text-gray-700 font-sans">
-                <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] mr-2 font-bold">
-                  ✓
+                <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mr-2">
+                  <Check className="w-3 h-3 stroke-[2.5]" />
                 </span>
                 {feature}
               </li>

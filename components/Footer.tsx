@@ -1,3 +1,4 @@
+import { Phone, Mail, Lock, Sparkles, ArrowRight } from 'lucide-react';
 import React from "react";
 import { Link } from "react-router-dom";
 import { NAV_LINKS } from "../constants";
@@ -92,7 +93,7 @@ const Footer: React.FC = () => {
                   onClick={(e) => handleNavClick(e, "/admin")}
                   className="hover:text-amber-300 font-semibold transition-colors inline-block py-0.5"
                 >
-                  🔒 Admin Portal
+                  <span className="inline-flex items-center gap-1.5"><Lock className="w-3.5 h-3.5 text-amber-300" /> Admin Portal</span>
                 </Link>
               </li>
             </ul>
@@ -126,7 +127,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/admissions" className="hover:text-orange-400 transition-colors font-semibold text-amber-200">
-                  ★ Apply for Admission
+                  <span className="inline-flex items-center gap-1.5"><ArrowRight className="w-3.5 h-3.5 text-amber-300" /> Apply for Admission</span>
                 </Link>
               </li>
             </ul>
@@ -145,13 +146,13 @@ const Footer: React.FC = () => {
                 href="tel:8009767534"
                 className="text-white hover:text-orange-400 font-bold block"
               >
-                📞 +91 8009767534
+                <span className="inline-flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-orange-400" /> +91 8009767534</span>
               </a>
               <a
                 href="mailto:funshalakindergarten@gmail.com"
                 className="text-white/75 hover:text-orange-400 text-xs block break-all"
               >
-                ✉️ funshalakindergarten@gmail.com
+                <span className="inline-flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-orange-400" /> funshalakindergarten@gmail.com</span>
               </a>
             </p>
           </div>
@@ -161,7 +162,7 @@ const Footer: React.FC = () => {
         <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
           <p>© {new Date().getFullYear()} Funshala Kindergarten. All rights reserved.</p>
           <p className="font-chalk text-sm text-amber-200/70">
-            Redefining Childhood with Love & Joy ✨
+            Redefining Childhood with Love & Joy
           </p>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { Bell } from 'lucide-react';
 import React, { useState, useEffect } from "react";
 import type { SchoolEvent } from "../types";
 import useScrollAnimation from "../hooks/useScrollAnimation";
@@ -124,7 +125,7 @@ const Events: React.FC = () => {
           </div>
         ) : events.length === 0 ? (
           <div className="text-center py-12 text-gray-500 font-fredoka max-w-md mx-auto bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
-            <span className="text-3xl mb-2 block">🎈</span>
+            <div className="flex justify-center mb-3"><Bell className="w-8 h-8 text-orange-500" /></div>
             <h4 className="font-bold text-lg text-gray-800">Stay Tuned!</h4>
             <p className="text-xs text-gray-500 mt-1">
               New exciting events will be announced soon. Check back often!

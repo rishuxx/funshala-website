@@ -1,3 +1,4 @@
+import { CheckCircle2 } from 'lucide-react';
 import React, { useState } from "react";
 import { Input, Textarea, Button } from "./FormControls";
 import * as api from "../lib/api";
@@ -40,8 +41,8 @@ const EnquiryForm: React.FC = () => {
   if (submitted) {
     return (
       <div className="text-center p-8 bg-green-50 border border-green-200 rounded-2xl">
-        <div className="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-3 text-2xl font-bold">
-          ✓
+        <div className="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-3">
+          <CheckCircle2 className="w-7 h-7" />
         </div>
         <h3 className="text-2xl font-fredoka font-bold text-green-700 mb-2">
           Message Sent!

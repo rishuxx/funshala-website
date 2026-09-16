@@ -159,7 +159,7 @@ const Header: React.FC<{ currentPage?: string }> = () => {
             onClick={(e) => handleNavClick(e, "/admissions")}
             className="w-full text-center py-3.5 bg-gradient-to-r from-brand-red to-brand-orange text-white font-outfit font-semibold text-lg rounded-xl shadow-md block"
           >
-            Admissions Open • Apply Now 🚀
+            Admissions Open • Apply Now
           </Link>
         </div>
       )}

@@ -1,3 +1,4 @@
+import { CheckCircle2 } from 'lucide-react';
 import React, { useState } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import { Input, Select, Textarea, Button } from "./FormControls";
@@ -48,8 +49,8 @@ const FranchiseForm: React.FC = () => {
         ref={ref}
         className="text-center p-8 sm:p-10 bg-white rounded-3xl shadow-2xl border border-green-200"
       >
-        <div className="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4 text-3xl">
-          ✓
+        <div className="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="w-10 h-10" />
         </div>
         <span className="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-chalk text-sm font-bold mb-2">
           Proposal Received!

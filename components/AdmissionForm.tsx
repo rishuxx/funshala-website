@@ -1,3 +1,4 @@
+import { CheckCircle2, User, Users, ShieldCheck } from 'lucide-react';
 import React, { useState, useEffect } from "react";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import { Input, Select, Button } from "./FormControls";
@@ -67,8 +68,8 @@ const AdmissionForm: React.FC = () => {
   if (submitted) {
     return (
       <div ref={ref} className="bg-white rounded-3xl p-8 sm:p-10 border border-green-200 shadow-xl text-center">
-        <div className="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4 text-3xl">
-          ✓
+        <div className="w-16 h-16 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center mx-auto mb-4">
+          <CheckCircle2 className="w-10 h-10" />
         </div>
         <span className="inline-block px-3 py-1 rounded-full bg-green-100 text-green-800 font-chalk text-sm font-bold mb-2">
           Application Received!
@@ -126,7 +127,7 @@ const AdmissionForm: React.FC = () => {
         {/* Child Details */}
         <div className="bg-orange-50/40 border border-orange-100/80 p-5 rounded-2xl">
           <h4 className="text-sm font-bold font-fredoka text-orange-700 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span>🧒</span> Child Details
+            <User className="w-4 h-4" /> Child Details
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             <Input
@@ -179,7 +180,7 @@ const AdmissionForm: React.FC = () => {
         {/* Parent Details */}
         <div className="bg-blue-50/30 border border-blue-100/80 p-5 rounded-2xl">
           <h4 className="text-sm font-bold font-fredoka text-blue-700 uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span>👨‍👩‍👧</span> Parent / Guardian Details
+            <Users className="w-4 h-4" /> Parent / Guardian Details
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             <Input
@@ -227,7 +228,7 @@ const AdmissionForm: React.FC = () => {
             {loading ? "Submitting Application..." : "Submit Admission Application →"}
           </Button>
           <p className="text-xs text-gray-400 mt-3 text-center sm:text-left">
-            🔒 Your data is safe. We never share family contact info with third parties.
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-4 h-4 text-green-600 inline" /> Your data is safe</span>. We never share family contact info with third parties.
           </p>
         </div>
       </form>
