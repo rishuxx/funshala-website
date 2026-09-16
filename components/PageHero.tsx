@@ -21,21 +21,20 @@ const PageHero: React.FC<PageHeroProps> = ({ title, pageKey }) => {
   }, [pageKey]);
 
   return (
-    <section className="relative pt-24 pb-14 md:pt-32 md:pb-20 min-h-[200px] flex items-center justify-center text-center overflow-hidden bg-[#0F2A44] px-4">
-      {/* Optional Custom Page Background Image */}
+    <section className="relative pt-28 pb-20 md:pt-40 md:pb-28 min-h-[300px] md:min-h-[360px] flex items-center justify-center text-center overflow-hidden bg-[#0F2A44] px-4">
+      {/* Background Image: Full clarity, no darkening filter */}
       {bgImage && (
         <div className="absolute inset-0 z-0">
           <img
             src={bgImage}
             alt={title}
-            className="w-full h-full object-cover opacity-30"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F2A44] via-[#0F2A44]/70 to-transparent" />
         </div>
       )}
 
       <div className="relative z-10 p-4">
-        <h1 className="text-4xl md:text-6xl font-outfit font-extrabold text-white tracking-tight drop-shadow-md">
+        <h1 className="text-4xl md:text-6xl font-outfit font-extrabold text-white tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
           {title}
         </h1>
       </div>
