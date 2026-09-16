@@ -35,7 +35,7 @@ const LoginForm: React.FC<{ onLogin: () => void }> = ({ onLogin }) => {
       <div className="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-2xl">
         <div className="text-center">
           <Logo />
-          <h2 className="mt-6 text-3xl font-bold text-gray-900 font-baloo">
+          <h2 className="mt-6 text-3xl font-bold text-gray-900 font-outfit">
             Admin Panel Login
           </h2>
         </div>
@@ -209,7 +209,7 @@ const EnquiryModal: React.FC<{
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 border-b flex justify-between items-center bg-gray-50 rounded-t-2xl">
-          <h3 className="text-2xl font-baloo font-bold text-gray-800">
+          <h3 className="text-2xl font-outfit font-bold text-gray-800">
             Enquiry Details
           </h3>
           <button
@@ -243,7 +243,7 @@ const EnquiryModal: React.FC<{
 
           {/* Admin Controls */}
           <div className="border-t pt-6">
-            <h4 className="text-lg font-bold font-baloo mb-4 text-brand-blue">
+            <h4 className="text-lg font-bold font-outfit mb-4 text-brand-blue">
               Admin Controls
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -353,7 +353,7 @@ const EnquiryManager: React.FC<{
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-2xl font-baloo font-bold">{title}</h3>
+        <h3 className="text-2xl font-outfit font-bold">{title}</h3>
         <button
           onClick={fetchData}
           className="text-sm text-brand-blue hover:underline"
@@ -565,13 +565,17 @@ const GalleryManager: React.FC = () => {
         { value: "Classroom", label: "Classroom" },
         { value: "Events", label: "Events" },
         { value: "Art", label: "Art" },
+        { value: "About", label: "About Page" },
+        { value: "Programs", label: "Programs Page" },
+        { value: "Admissions", label: "Admissions Page" },
+        { value: "Franchise", label: "Franchise Page" },
       ],
     },
   ];
 
   return (
     <div>
-      <h3 className="text-2xl font-baloo font-bold mb-4">Add New Image</h3>
+      <h3 className="text-2xl font-outfit font-bold mb-4">Add New Image</h3>
       <form
         onSubmit={handleSubmit}
         className="space-y-4 max-w-lg mb-8 p-4 border rounded-lg bg-white shadow-sm"
@@ -605,6 +609,10 @@ const GalleryManager: React.FC = () => {
           <option value="Classroom">Classroom</option>
           <option value="Events">Events</option>
           <option value="Art">Art</option>
+          <option value="About">About Page</option>
+          <option value="Programs">Programs Page</option>
+          <option value="Admissions">Admissions Page</option>
+          <option value="Franchise">Franchise Page</option>
         </Select>
         <Button type="submit" disabled={loading}>
           {loading ? "Uploading..." : "Add Image"}
@@ -614,7 +622,7 @@ const GalleryManager: React.FC = () => {
         )}
       </form>
 
-      <h3 className="text-2xl font-baloo font-bold mb-4">Existing Images</h3>
+      <h3 className="text-2xl font-outfit font-bold mb-4">Existing Images</h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {images.map((image) => (
           <div
@@ -834,7 +842,7 @@ const HeroSettingsManager: React.FC = () => {
 
   return (
     <div className="max-w-3xl bg-white p-8 rounded-2xl shadow-md border border-gray-100">
-      <h3 className="text-2xl font-baloo font-bold mb-6 text-brand-blue">
+      <h3 className="text-2xl font-outfit font-bold mb-6 text-brand-blue">
         Hero Section Live Content Editor
       </h3>
       <form onSubmit={handleSave} className="space-y-6">
@@ -985,7 +993,7 @@ const SecuritySettingsManager: React.FC = () => {
 
   return (
     <div className="max-w-xl bg-white p-8 rounded-2xl shadow-md border border-gray-100">
-      <h3 className="text-2xl font-baloo font-bold mb-4 text-brand-blue">
+      <h3 className="text-2xl font-outfit font-bold mb-4 text-brand-blue">
         Security & Password Protection
       </h3>
       <p className="text-sm text-gray-600 mb-6">
@@ -1106,7 +1114,7 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-        <h1 className="text-4xl font-baloo font-bold text-brand-blue">
+        <h1 className="text-4xl font-outfit font-bold text-brand-blue">
           Admin Dashboard
         </h1>
         <div className="flex items-center space-x-4">
@@ -1137,7 +1145,7 @@ const AdminDashboard: React.FC = () => {
           <button
             key={v}
             onClick={() => setView(v)}
-            className={`capitalize pb-2 px-3 font-bold font-baloo border-b-4 transition-colors text-sm sm:text-base whitespace-nowrap ${
+            className={`capitalize pb-2 px-3 font-bold font-outfit border-b-4 transition-colors text-sm sm:text-base whitespace-nowrap ${
               view === v
                 ? "border-brand-red text-brand-red"
                 : "border-transparent text-gray-500 hover:text-brand-blue"

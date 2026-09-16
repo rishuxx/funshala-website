@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import type { SchoolEvent } from "../types";
 import useScrollAnimation from "../hooks/useScrollAnimation";
 import * as api from "../lib/api";
-import { CalendarIcon, PartyIcon, SportsIcon } from "./IconComponents";
+import { Calendar, PartyPopper, Trophy } from "lucide-react";
 
 // Function to get an icon based on event title
 const getEventIcon = (title: string) => {
   const lowerTitle = title.toLowerCase();
-  if (lowerTitle.includes("sport") || lowerTitle.includes("yoga") || lowerTitle.includes("athlet")) return SportsIcon;
+  if (lowerTitle.includes("sport") || lowerTitle.includes("yoga") || lowerTitle.includes("athlet")) return Trophy;
   if (
     lowerTitle.includes("diwali") ||
     lowerTitle.includes("gala") ||
@@ -15,8 +15,8 @@ const getEventIcon = (title: string) => {
     lowerTitle.includes("celebration") ||
     lowerTitle.includes("annual")
   )
-    return PartyIcon;
-  return CalendarIcon;
+    return PartyPopper;
+  return Calendar;
 };
 
 const EventCard: React.FC<{ event: SchoolEvent; index: number }> = ({
@@ -25,7 +25,7 @@ const EventCard: React.FC<{ event: SchoolEvent; index: number }> = ({
 }) => {
   const { ref, isVisible } = useScrollAnimation();
   const delay = `${index * 120}ms`;
-  const IconComponent = event.icon || CalendarIcon;
+  const IconComponent = event.icon || Calendar;
 
   const bgGradients = [
     "from-orange-500 to-amber-500 text-white shadow-orange-500/20",
@@ -48,7 +48,7 @@ const EventCard: React.FC<{ event: SchoolEvent; index: number }> = ({
             bgGradients[index % bgGradients.length]
           } flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}
         >
-          <IconComponent className="w-7 h-7" />
+          <IconComponent className="w-7 h-7 text-white stroke-[2.5]" />
         </div>
       </div>
       <div className="flex-grow">

@@ -32,6 +32,7 @@ const Gallery: React.FC = () => {
     // Exclude any accidental hero banners or hero images from gallery displays
     const publicImages = images.filter(
       (img) =>
+        img.category !== "Hero" &&
         !img.alt_text?.toLowerCase().includes("hero") &&
         !img.file_name?.toLowerCase().includes("hero") &&
         !img.public_url?.includes("1789482726171")

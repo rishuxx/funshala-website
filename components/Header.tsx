@@ -87,9 +87,9 @@ const Header: React.FC<{ currentPage?: string }> = () => {
                   key={link.name}
                   to={link.page}
                   onClick={(e) => handleNavClick(e, link.page)}
-                  className={`font-fredoka font-medium text-[0.95rem] px-4 py-1.5 rounded-full transition-all duration-200 ${
+                  className={`font-outfit font-medium text-[0.95rem] px-4 py-1.5 rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-white text-brand-red shadow-sm font-semibold scale-105"
+                      ? "bg-orange-500 text-white shadow-sm font-semibold scale-105"
                       : "text-gray-700 hover:text-brand-orange hover:bg-white/60"
                   }`}
                 >
@@ -104,7 +104,7 @@ const Header: React.FC<{ currentPage?: string }> = () => {
             <Link
               to="/admissions"
               onClick={(e) => handleNavClick(e, "/admissions")}
-              className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-fredoka font-semibold rounded-full shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 text-sm"
+              className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-outfit font-semibold rounded-full shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2 text-sm"
             >
               <span>Enroll Now</span>
             </Link>
@@ -142,7 +142,7 @@ const Header: React.FC<{ currentPage?: string }> = () => {
                   key={link.name}
                   to={link.page}
                   onClick={(e) => handleNavClick(e, link.page)}
-                  className={`text-lg font-fredoka font-medium px-4 py-2.5 rounded-xl transition-colors ${
+                  className={`text-lg font-outfit font-medium px-4 py-2.5 rounded-xl transition-colors ${
                     isActive
                       ? "bg-orange-100 text-brand-red font-semibold"
                       : "text-gray-700 hover:bg-gray-50"
@@ -157,7 +157,7 @@ const Header: React.FC<{ currentPage?: string }> = () => {
           <Link
             to="/admissions"
             onClick={(e) => handleNavClick(e, "/admissions")}
-            className="w-full text-center py-3.5 bg-gradient-to-r from-brand-red to-brand-orange text-white font-fredoka font-semibold text-lg rounded-xl shadow-md block"
+            className="w-full text-center py-3.5 bg-gradient-to-r from-brand-red to-brand-orange text-white font-outfit font-semibold text-lg rounded-xl shadow-md block"
           >
             Admissions Open • Apply Now 🚀
           </Link>
