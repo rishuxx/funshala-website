@@ -5,38 +5,47 @@ import logo from "../assets/FullLogo.svg";
 const PageTransition: React.FC = () => {
   const transitionState = useTransitionState();
 
+  // Vibrant, saturated rainbow colors
+  const colors = [
+    "bg-red-500", // Bright red
+    "bg-orange-500", // Vivid orange
+    "bg-yellow-400", // Sunny yellow
+    "bg-green-500", // Fresh green
+    "bg-blue-500", // Bold blue
+    "bg-purple-500", // Rich purple
+  ];
+
   if (transitionState === "idle") {
     return null;
   }
 
-  const isEntering = transitionState === "in";
+  const wipeAnimationClass =
+    transitionState === "in"
+      ? "animate-rainbow-wipe-in"
+      : "animate-rainbow-wipe-out";
+  const logoAnimationClass =
+    transitionState === "in" ? "animate-logo-in" : "animate-logo-out";
 
   return (
-    <div
-      className={`fixed inset-0 z-[100] pointer-events-none flex items-center justify-center transition-opacity duration-300 ${
-        isEntering ? "opacity-100" : "opacity-0"
-      }`}
-      style={{
-        backgroundColor: "rgba(255, 250, 245, 0.95)",
-        backdropFilter: "blur(8px)",
-      }}
-    >
-      <div
-        className={`transform transition-all duration-300 flex flex-col items-center gap-3 ${
-          isEntering ? "scale-100 opacity-100" : "scale-95 opacity-0"
-        }`}
-      >
-        <div className="bg-white rounded-3xl p-6 shadow-2xl border border-orange-100 flex items-center justify-center w-36 h-36">
-          <img
-            src={logo}
-            alt="Funshala Kindergarten"
-            className="w-24 h-24 object-contain"
+    <div className="fixed top-0 left-0 w-full h-full z-[100] pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 flex">
+        {colors.map((color, i) => (
+          <div
+            key={i}
+            className={`flex-1 ${color} ${wipeAnimationClass}`}
+            style={{ animationDelay: `${i * 60}ms` }}
           />
-        </div>
-        <div className="flex items-center gap-1.5">
-          <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
-          <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" style={{ animationDelay: '150ms' }} />
-          <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" style={{ animationDelay: '300ms' }} />
+        ))}
+      </div>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className={`${logoAnimationClass}`}>
+          <div className="bg-white rounded-full p-8 shadow-2xl flex items-center justify-center w-48 h-48">
+            <img
+              src={logo}
+              alt="Funshala Logo"
+              className="w-32 h-32 object-contain"
+            />
+          </div>
         </div>
       </div>
     </div>

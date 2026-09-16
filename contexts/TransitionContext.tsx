@@ -48,19 +48,23 @@ export const TransitionProvider: React.FC<TransitionProviderProps> = ({
     (targetPath: PageName) => {
       if (transitionState !== "idle") return;
 
-      // Smooth, gentle page transition with natural duration
+      // Start 'in' animation (wipes screen)
       setTransitionState("in");
-      const animationDuration = 400;
 
+      const animationDuration = 600; // Corresponds to the rainbow wipe animation duration in CSS
+
+      // Wait for the 'in' animation to cover the screen, then navigate.
       setTimeout(() => {
         navigate(targetPath);
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo(0, 0);
+        // Immediately start the 'out' animation after the route changes
         setTransitionState("out");
       }, animationDuration);
 
+      // After the 'out' animation is complete, reset to 'idle'
       setTimeout(() => {
         setTransitionState("idle");
-      }, animationDuration + 300);
+      }, animationDuration * 2); // Total duration of 'in' + 'out'
     },
     [transitionState, navigate]
   );
