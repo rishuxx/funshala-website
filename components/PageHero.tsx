@@ -1,20 +1,41 @@
+import React, { useState, useEffect } from "react";
+import { getSiteSettings } from "../lib/api";
 
-import React from 'react';
+interface PageHeroProps {
+  title: string;
+  pageKey?: string; // e.g. 'about', 'programs', 'admissions', 'gallery', 'franchise', 'contact'
+}
 
-const PageHeroBackground: React.FC = () => (
-    <div className="absolute inset-0 z-0 overflow-hidden bg-gradient-to-b from-sky-100 to-pastel-bg">
-        <div className="absolute -top-20 -left-20 w-72 h-72 bg-brand-red/10 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/4 -right-20 w-96 h-96 bg-brand-blue/10 rounded-full filter blur-3xl animate-pulse delay-75"></div>
-        <div className="absolute bottom-0 -left-1/4 w-96 h-96 bg-brand-yellow/10 rounded-3xl transform rotate-45 filter blur-3xl animate-pulse delay-150"></div>
-        <div className="absolute bottom-1/4 -right-1/4 w-80 h-80 bg-brand-green/10 rounded-full filter blur-3xl animate-pulse delay-200"></div>
-    </div>
-);
+const PageHero: React.FC<PageHeroProps> = ({ title, pageKey }) => {
+  const [bgImage, setBgImage] = useState<string>("");
 
-const PageHero: React.FC<{ title: string }> = ({ title }) => {
+  useEffect(() => {
+    if (!pageKey) return;
+    const fetchPageBanner = async () => {
+      const data = await getSiteSettings(`page_hero_${pageKey}`);
+      if (data && data.image) {
+        setBgImage(data.image);
+      }
+    };
+    fetchPageBanner();
+  }, [pageKey]);
+
   return (
     <section className="relative pt-24 pb-14 md:pt-32 md:pb-20 min-h-[200px] flex items-center justify-center text-center overflow-hidden bg-[#0F2A44] px-4">
+      {/* Optional Custom Page Background Image */}
+      {bgImage && (
+        <div className="absolute inset-0 z-0">
+          <img
+            src={bgImage}
+            alt={title}
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F2A44] via-[#0F2A44]/70 to-transparent" />
+        </div>
+      )}
+
       <div className="relative z-10 p-4">
-        <h1 className="text-4xl md:text-6xl font-outfit font-extrabold text-white tracking-tight">
+        <h1 className="text-4xl md:text-6xl font-outfit font-extrabold text-white tracking-tight drop-shadow-md">
           {title}
         </h1>
       </div>

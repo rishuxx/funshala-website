@@ -51,37 +51,37 @@ const HomePage: React.FC = () => (
 // Individual Page Wrappers for Routing
 const AboutPage: React.FC = () => (
   <main className="flex-grow">
-    <PageHero title="About Us" />
+    <PageHero title="About Us" pageKey="about" />
     <About />
   </main>
 );
 const ProgramsPage: React.FC = () => (
   <main className="flex-grow">
-    <PageHero title="Our Programs" />
+    <PageHero title="Our Programs" pageKey="programs" />
     <Programs />
   </main>
 );
 const AdmissionsPage: React.FC = () => (
   <main className="flex-grow">
-    <PageHero title="Admissions" />
+    <PageHero title="Admissions" pageKey="admissions" />
     <Admissions />
   </main>
 );
 const GalleryPage: React.FC = () => (
   <main className="flex-grow">
-    <PageHero title="Gallery" />
+    <PageHero title="Gallery" pageKey="gallery" />
     <Gallery />
   </main>
 );
 const FranchisePage: React.FC = () => (
   <main className="flex-grow">
-    <PageHero title="Franchise" />
+    <PageHero title="Franchise" pageKey="franchise" />
     <Franchise />
   </main>
 );
 const ContactPage: React.FC = () => (
   <main className="flex-grow">
-    <PageHero title="Contact Us" />
+    <PageHero title="Contact Us" pageKey="contact" />
     <Contact />
   </main>
 );
